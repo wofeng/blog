@@ -1,0 +1,633 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Security," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="CSP is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything fro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原- 分享 CSP (Content Security Policy) 解决方法">
+<meta property="og:url" content="https://wofeng.github.io/blog/2016/06/09/2016-06-05-CSP/index.html">
+<meta property="og:site_name" content="WuFeng's Blog">
+<meta property="og:description" content="CSP is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything fro">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/blog/20160605_csp1.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/blog/20160605_csp2.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/blog/20160605_csp3.jpg">
+<meta property="og:updated_time" content="2016-06-09T02:49:15.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原- 分享 CSP (Content Security Policy) 解决方法">
+<meta name="twitter:description" content="CSP is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything fro">
+<meta name="twitter:image" content="https://wofeng.github.io/blog/blog/images/blog/20160605_csp1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 原- 分享 CSP (Content Security Policy) 解决方法 | WuFeng's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WuFeng's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Technique Blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                原- 分享 CSP (Content Security Policy) 解决方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-09T17:45:26+08:00" content="2016-06-09">
+              2016-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Security</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/blog/2016/06/09/2016-06-05-CSP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/09/2016-06-05-CSP/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+           
+           
+              <span>&nbsp; | &nbsp;
+              <span id="busuanzi_value_page_pv" ></span>次阅读
+              </span>    
+           
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>经过近一个半Sprint的摸索和尝试，总算给项目(Portal)穿上了CSP这层安全盔甲，在这里忍不住要给各位吐槽下， 分享处理CSP问题过程中的经验。<br><strong>什么是CSP ?</strong> CSP is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. -<a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP" target="_blank" rel="external">MDN</a> 简而言之，CSP规范可以设定资源(javascript, css, image, frame ….)加载域的白名单， 也可以限制内联Javascript的执行，避免由于系统漏洞导致中间人利用脚本注入攻击系统。</p>
+<a id="more"></a>
+<p><strong>Portal实现哪些CSP Requirements ？</strong><br>目前根据CSP规范 Portal 完成了 1. 资源加载来源的检测 2. 重构代码消除所有内联Javascript</p>
+<p><strong>Portal资源加载规则是什么？</strong> 目前 Portal没有跨域资源加载的情况，所以设置为self 本域有效，具体可参考CSP level 2规范CSP evel 2规范 Content-Security-Policy: default-src ‘self’; img-src ‘self’ data:; style-src ‘self’ ‘unsafe-inline’; script-src ‘self’ ‘unsafe-eval’ ‘nonce-{random string}’; object-src ‘none’; child-src ‘none’</p>
+<p><strong>CSP如何检测内联Javascript是否合法?</strong> 根据<a href="https://www.w3.org/TR/CSP2/" target="_blank" rel="external">CSP level2</a>定义，在CSP规则里引入nonce，浏览器根据CSP规则进行检测，只有申明nonce并且值与Response Header里值相同才被视为合法。 除此之外HTML里的JS事件都被认为非法。</p>
+<p><strong>W如何在Portal消除内联JS?</strong> 首先根据CSP 规则增加nonce定义，修改所有含有内联JS JSP页面, 其次消除所有HTML JS事件 , 最后修改所有空链接实现。 如下写法是不合法的</p>
+<p><strong>1.无nonce申明</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><br><span class="line">…</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>2.HTML JS</strong><br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">input</span> <span class="keyword">onclick</span>=<span class="string">"javascript: alert('test')"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.空链接实现</strong><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span>  href=<span class="string">"javascript:;"</span>&gt; </span><br><span class="line">&lt;<span class="selector-tag">a</span> href=<span class="string">"javascript:void(0)"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Portal 实现CSP过程遇到的问题有哪些?</strong></p>
+<p><strong>1. 清理内联JS</strong><br>根据规范要求，所有HTML事件通过JS 来绑定 ，而不要使用HTML事件属性，空链接要改成<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span> href=<span class="string">"#"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>形式，为了避免页面刷新还需要阻止默认事件行为的触发。</p>
+<p><strong>2.处理bypass CSP检测</strong><br>Portal大部分页面加载通过ajax 方式jquery 的load方法实现，由于采用’unsafe-eval’规则，允许通过load执行HTML中javascript， 绕过目前CSP的检测，需要改写loadPage方法， <a href="https://blogs.dropbox.com/tech/2015/09/csp-the-unexpected-eval/" target="_blank" rel="external">详细细节参考</a></p>
+<p>测试<strong>Cases 1 JSP引入非本域javascript或 css, 浏览器阻止引用</strong><br><img src="/blog/images/blog/20160605_csp1.jpg" alt="">&lt;%= _(‘root’) %&gt;</p>
+<p><strong>Case2 假如Web.jsp被注入恶意脚本，浏览器阻止脚本执行</strong><br><img src="/blog/images/blog/20160605_csp2.jpg" alt=""></p>
+<p><strong>Case3 假如ajax加载页面被注入恶意脚本，程序能检测并阻止脚本执行</strong><br><img src="/blog/images/blog/20160605_csp3.jpg" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/**</span><br><span class="line"> * CSP (Content Security Policy) requirement</span><br><span class="line"> * Comment on illegal inline js code to block inline js</span><br><span class="line"> * without or wrong nonce attribute execution</span><br><span class="line"> * </span><br><span class="line"> * refer to: https://blogs.dropbox.com/tech/2015/09/csp-the-unexpected-eval/</span><br><span class="line"> * </span><br><span class="line"> * @param  &#123;string&#125; htmltxt [get it via ajax call(load)]</span><br><span class="line"> * @return &#123;DOM&#125;         [comment illegal inline js code]</span><br><span class="line"> * @author Feng Wu         </span><br><span class="line"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">handleCSPNonce</span>(<span class="params">htmltxt</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> ut = <span class="keyword">this</span>,</span><br><span class="line">		html = $(htmltxt), </span><br><span class="line">		csp_script_nonce = html.find(<span class="string">"#csp_nonce"</span>).val(), </span><br><span class="line">		isscript = <span class="regexp">/^(\&lt;script)(\S|\s)+/ig</span>.test(htmltxt),</span><br><span class="line">		inlinejs, comment,</span><br><span class="line">		errmsgs = [<span class="string">"Refused to execute script because CSP_SCRIPT_NONCE"</span> +</span><br><span class="line">                             <span class="string">" is defined and the nonce doesn't match."</span>];</span><br><span class="line">                    </span><br><span class="line">		</span><br><span class="line">	<span class="keyword">if</span>(!isscript) &#123;  <span class="comment">//htmltxt includes javascript</span></span><br><span class="line">		inlinejs = html.find(<span class="string">"script"</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> !!$(<span class="keyword">this</span>).attr(<span class="string">"src"</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">if</span>(inlinejs.length !== <span class="number">0</span>) &#123;</span><br><span class="line">			inlinejs.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	     		<span class="keyword">var</span> el = $(<span class="keyword">this</span>), </span><br><span class="line">		         	js_nonce = el.attr(<span class="string">"nonce"</span>) || <span class="string">""</span>,</span><br><span class="line">		         	script, parent, errmsg;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span>(csp_script_nonce !== js_nonce) &#123;</span><br><span class="line">	  				script = el.text();</span><br><span class="line">	  				parent = el.parent();</span><br><span class="line">	  				el.remove();</span><br><span class="line">					errmsgs.push([<span class="string">"expected:&lt;"</span>, csp_script_nonce, <span class="string">"&gt; but was:&lt;"</span>, js_nonce, <span class="string">"&gt;"</span>].join(<span class="string">""</span>))</span><br><span class="line">					errmsg = errmsgs.join(<span class="string">""</span>);</span><br><span class="line">	  				comment = [<span class="string">"&lt;!--"</span>, errmsg, <span class="string">"&lt;script type='text/javascript'&gt;"</span>,  script,  <span class="string">"&lt;/script&gt; --&gt;"</span>].join(<span class="string">""</span>);</span><br><span class="line">					ut.log(errmsg, <span class="string">"error"</span>);</span><br><span class="line">					$(parent).append(comment);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; <span class="comment">//htmltxt is inline javascript </span></span><br><span class="line">		inlinejs = html;</span><br><span class="line">		errmsg = errmsgs.join(<span class="string">""</span>);</span><br><span class="line">		comment = [<span class="string">"&lt;!--"</span>, errmsg, <span class="string">"&lt;script type='text/javascript'&gt;"</span>,  htmltxt,  <span class="string">"&lt;/script&gt; --&gt;"</span>].join(<span class="string">""</span>);</span><br><span class="line">		ut.log(errmsg, <span class="string">"error"</span>);</span><br><span class="line">		<span class="keyword">return</span> $(comment);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>随着安全标准和规范地不断完善，浏览器安全性也在不断改进，需要我们能够了解并且使用到项目中，实现的过程中往往也需要改变我们的编程习惯，摸索的过程是痛苦的但痛苦过后就是方向和未来。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Security/" rel="tag">#Security</a>
+          
+        </div>
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+ 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/09/2016-06-05-CSP/"
+           data-title="原- 分享 CSP (Content Security Policy) 解决方法" data-url="https://wofeng.github.io/blog/blog/2016/06/09/2016-06-05-CSP/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.jpg"
+               alt="Wu Feng" />
+          <p class="site-author-name" itemprop="name">Wu Feng</p>
+          <p class="site-description motion-element" itemprop="description">Keep it sample and satisfied</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu Feng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div>本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wofeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
