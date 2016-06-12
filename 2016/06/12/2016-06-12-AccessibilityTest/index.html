@@ -1,0 +1,641 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Accessibility," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="This is a quick guide for web accessibility testing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="<原创>Web Accessibility Test Quick Guide">
+<meta property="og:url" content="https://wofeng.github.io/blog/2016/06/12/2016-06-12-AccessibilityTest/index.html">
+<meta property="og:site_name" content="WuFeng's Blog">
+<meta property="og:description" content="This is a quick guide for web accessibility testing">
+<meta property="og:image" content="http://img.youtube.com/vi/MO2gpA91fR8/0.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-1.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-2.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-3.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-4.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-5.jpg">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/accessibility/20160612-6.jpg">
+<meta property="og:updated_time" content="2016-06-12T16:40:19.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<原创>Web Accessibility Test Quick Guide">
+<meta name="twitter:description" content="This is a quick guide for web accessibility testing">
+<meta name="twitter:image" content="http://img.youtube.com/vi/MO2gpA91fR8/0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> <原创>Web Accessibility Test Quick Guide | WuFeng's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WuFeng's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Technique Blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                <原创>Web Accessibility Test Quick Guide
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-12T23:26:17+08:00" content="2016-06-12">
+              2016-06-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/Accessibility/" itemprop="url" rel="index">
+                    <span itemprop="name">Accessibility</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/blog/2016/06/12/2016-06-12-AccessibilityTest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/12/2016-06-12-AccessibilityTest/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+           
+           
+              <span>&nbsp; | &nbsp;
+              <span id="busuanzi_value_page_pv" ></span>次阅读
+              </span>    
+           
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="What-is-Web-Accessibility"><a href="#What-is-Web-Accessibility" class="headerlink" title="What is Web Accessibility?"></a>What is Web Accessibility?</h2><p><a href="http://www.youtube.com/watch?v=MO2gpA91fR8" target="_blank" rel="external"><img src="http://img.youtube.com/vi/MO2gpA91fR8/0.jpg" alt="World Wide Access"></a><br>Web accessibility means making sure that Web pages and Web applications are usable by people of all abilities and disabilities.<br>Disabilities including:<br>    ● Visual<br>    ● Auditory<br>    ● Physical<br>    ● Speech<br>    ● Cognitive<br>    ● Neurological<br>    ● …</p>
+<h2 id="How-People-with-Disabilities-Use-the-Web"><a href="#How-People-with-Disabilities-Use-the-Web" class="headerlink" title="How People with Disabilities Use the Web?"></a>How People with Disabilities Use the Web?</h2><p><img src="/blog/images/pics/accessibility/20160612-1.jpg" alt=""></p>
+<h2 id="Why-You-Need-to-Care-About-Accessibility"><a href="#Why-You-Need-to-Care-About-Accessibility" class="headerlink" title="Why You Need to Care About Accessibility?"></a>Why You Need to Care About Accessibility?</h2><p><a href="http://www.un.org/disabilities/default.asp?navid=12&amp;pid=150" target="_blank" rel="external">UN Convention on the Rights of Persons with Disabilities</a> recognizes access to information and communications technologies, including the Web, as a basic human right.  - From <a href="http://www.w3.org/standards/webdesign/accessibility" target="_blank" rel="external">W3C</a><br>United States Laws <a href="http://www.dol.gov/oasam/regs/statutes/sec508.htm" target="_blank" rel="external">Rehabilitation Act of 1973 (Sections 504 and 508)</a> – From <a href="http://webaim.org/articles/laws/usa/rehab" target="_blank" rel="external">WebAIM</a><br>[Countries with Accessibility Policy] (<a href="http://www.w3.org/WAI/Policy/" target="_blank" rel="external">http://www.w3.org/WAI/Policy/</a>)<br><a href="http://www.w3.org/TR/WCAG20/" target="_blank" rel="external">Web Content Accessibility Guidelines 2.0  (WCAG)</a><br><img src="/blog/images/pics/accessibility/20160612-2.jpg" alt=""></p>
+<h2 id="Four-main-principles"><a href="#Four-main-principles" class="headerlink" title="Four main principles"></a>Four main principles</h2><p><strong>Principle 1: Perceivable</strong><br><code>Information and user interface components must be presentable to users in ways they can perceive.</code></p>
+<p><strong>Principle 2: Operable </strong><br><code>User interface components and navigation must be operable</code><br><strong>Principle 3: Understandable</strong><br><code>Information and the operation of user interface must be understandable.</code><br><strong>Principle 4: Robust</strong><br><code>Content must be robust enough that it can be interpreted reliably by a wide variety of user agents,
+including assistive technologies.</code></p>
+<h2 id="Development-and-Testing-Procedure"><a href="#Development-and-Testing-Procedure" class="headerlink" title="Development and Testing Procedure"></a>Development and Testing Procedure</h2><p><strong>Code Inspection</strong><br>Use SOATest Tool or WAVE to scan HTML code<br>SOATest tool Rules<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">1.1.1 T1: If the image is not important, <span class="keyword">use</span> ALT=<span class="string">""</span> <span class="keyword">and</span> <span class="keyword">no</span> TITLE <span class="keyword">attribute</span> <span class="keyword">or</span> TITLE=<span class="string">""</span> so screen readers can <span class="keyword">ignore</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T1: Image should have a meaningful description <span class="keyword">in</span> the ALT <span class="keyword">attribute</span> <span class="keyword">or</span> <span class="keyword">use</span> <span class="keyword">empty</span> ALT <span class="built_in">text</span> <span class="keyword">if</span> it <span class="keyword">is</span> <span class="keyword">not</span> important</span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T1: Image should have a meaningful description <span class="keyword">in</span> the ALT <span class="keyword">attribute</span> <span class="keyword">or</span> <span class="keyword">use</span> <span class="keyword">empty</span> ALT <span class="built_in">text</span> <span class="keyword">if</span> it <span class="keyword">is</span> <span class="keyword">not</span> important</span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T1: The ALT <span class="keyword">attribute</span> must be defined <span class="keyword">for</span> an image</span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T2: Image <span class="keyword">for</span> an image <span class="keyword">map</span> must have description <span class="keyword">in</span> the ALT <span class="keyword">attribute</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T2: AREA <span class="keyword">element</span> must have a description <span class="keyword">in</span> the ALT <span class="keyword">attribute</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T2: <span class="built_in">Text</span> links should be provided <span class="keyword">for</span> regions <span class="keyword">of</span> <span class="keyword">server</span>-side image <span class="keyword">map</span> <span class="keyword">or</span> <span class="keyword">use</span> <span class="keyword">client</span>-side image <span class="keyword">map</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T3: Provide alternative <span class="built_in">text</span> <span class="keyword">for</span> all image-<span class="keyword">type</span> buttons</span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T4: Image must have a meaningful ALT <span class="built_in">text</span> <span class="keyword">or</span> <span class="keyword">link</span> <span class="built_in">text</span> must be used <span class="keyword">to</span> <span class="keyword">describe</span> the graphical <span class="keyword">link</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T7: Provide alternative <span class="built_in">text</span> <span class="keyword">for</span> <span class="keyword">each</span> APPLET <span class="keyword">in</span> the ALT <span class="keyword">attribute</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T8: <span class="keyword">If</span> <span class="keyword">OBJECT</span> <span class="keyword">element</span> <span class="keyword">is</span> used, provide a <span class="built_in">text</span> equivalent <span class="keyword">in</span> the <span class="keyword">body</span> <span class="keyword">of</span> the <span class="keyword">element</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T10: A descriptive label should be provided <span class="keyword">for</span> the multimedia object. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T10: A descriptive label should be provided <span class="keyword">for</span> the multimedia reference. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span> T10: A descriptive label should be provided <span class="keyword">for</span> the Shockwave presentation. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T1 T2: <span class="keyword">Form</span> controls <span class="keyword">and</span> their labels should be explicitly associated <span class="keyword">with</span> the LABEL <span class="keyword">element</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T3: <span class="keyword">If</span> there <span class="keyword">are</span> <span class="keyword">logical</span> groupings <span class="keyword">of</span> <span class="keyword">form</span> controls, <span class="keyword">consider</span> <span class="keyword">using</span> FIELDSET <span class="keyword">with</span> LEGEND <span class="keyword">on</span> <span class="keyword">each</span> group. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T4 T5 T6: <span class="keyword">If</span> <span class="keyword">data</span> <span class="keyword">table</span>, <span class="keyword">data</span> cells should have HEADERS <span class="keyword">attribute</span> <span class="keyword">to</span> <span class="keyword">list</span> the IDs <span class="keyword">of</span> the header cells. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T4 T5 T6: <span class="keyword">If</span> <span class="keyword">data</span> <span class="keyword">table</span>, provide <span class="keyword">unique</span> IDs <span class="keyword">in</span> header cells <span class="keyword">and</span> <span class="keyword">reference</span> them <span class="keyword">in</span> HEADER <span class="keyword">attribute</span> <span class="keyword">of</span> <span class="keyword">data</span> cells. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T4 T5 T6: <span class="keyword">If</span> <span class="keyword">data</span> <span class="keyword">table</span>, provide a description via the SUMMARY <span class="keyword">attribute</span> <span class="keyword">or</span> CAPTION element. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T4: <span class="keyword">If</span> layout <span class="keyword">table</span>, the SUMMARY <span class="keyword">attribute</span> should <span class="keyword">not</span> be used <span class="keyword">or</span> should be empty. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">1.3</span><span class="number">.1</span> T4: <span class="keyword">If</span> layout <span class="keyword">table</span>, <span class="keyword">only</span> <span class="keyword">use</span> <span class="keyword">TABLE</span>, TR, <span class="keyword">and</span> TD elements. Screen Reader <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.2</span><span class="number">.2</span> T1: Avoid blinking <span class="built_in">text</span> created <span class="keyword">with</span> the BLINK <span class="keyword">element</span></span><br><span class="line"><span class="number">2.4</span><span class="number">.1</span> T6: Provide a TITLE <span class="keyword">attribute</span> <span class="keyword">for</span> <span class="keyword">each</span> FRAME <span class="keyword">element</span></span><br><span class="line"><span class="number">2.4</span><span class="number">.1</span> T6: The FRAME <span class="keyword">element</span> should have a meaningful description <span class="keyword">in</span> the TITLE <span class="keyword">attribute</span></span><br><span class="line"><span class="number">2.4</span><span class="number">.1</span> T6: Provide a TITLE <span class="keyword">attribute</span> <span class="keyword">for</span> <span class="keyword">each</span> IFRAME <span class="keyword">element</span></span><br><span class="line"><span class="number">2.4</span><span class="number">.1</span> T6: The IFRAME <span class="keyword">element</span> should have a meaningful description <span class="keyword">in</span> the TITLE <span class="keyword">attribute</span></span><br><span class="line"><span class="number">2.1</span><span class="number">.1</span> T2: Mouse <span class="keyword">events</span> might need <span class="keyword">to</span> be paired <span class="keyword">with</span> <span class="keyword">key</span> <span class="keyword">events</span> <span class="keyword">to</span> be accessible. Keyboard <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">2.1</span><span class="number">.1</span> T2: onDblClick <span class="keyword">event</span> <span class="keyword">handler</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">accessible</span>, <span class="keyword">use</span> onClick instead</span><br><span class="line"><span class="number">2.1</span><span class="number">.1</span> T2: Mouse <span class="keyword">movement</span> <span class="keyword">events</span> might need <span class="keyword">to</span> be paired <span class="keyword">with</span> <span class="keyword">key</span> <span class="keyword">events</span> <span class="keyword">to</span> be accessible. Keyboard <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">2.2</span><span class="number">.2</span> T1: Avoid scrolling <span class="built_in">text</span> created <span class="keyword">with</span> the MARQUEE <span class="keyword">element</span></span><br><span class="line"><span class="number">2.4</span><span class="number">.2</span> T1: Provide a TITLE <span class="keyword">element</span> <span class="keyword">in</span> the <span class="keyword">HEAD</span> <span class="keyword">section</span> <span class="keyword">of</span> <span class="keyword">each</span> page</span><br><span class="line"><span class="number">2.4</span><span class="number">.2</span> T1: A meaningful title must be provided <span class="keyword">for</span> <span class="keyword">each</span> page <span class="keyword">in</span> TITLE <span class="keyword">element</span> </span><br><span class="line"></span><br><span class="line"><span class="number">3.1</span><span class="number">.1</span> T1: The <span class="keyword">value</span> <span class="keyword">of</span> the LANG <span class="keyword">attribute</span> must be <span class="keyword">set</span> <span class="keyword">to</span> one <span class="keyword">of</span> the ISO <span class="number">639</span> <span class="keyword">language</span> codes</span><br><span class="line"><span class="number">3.2</span><span class="number">.1</span> T1: onBlur <span class="keyword">and</span> onFocus should <span class="keyword">not</span> be used <span class="keyword">to</span> initiate a major <span class="keyword">change</span> <span class="keyword">of</span> context. Keyboard <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"><span class="number">3.2</span><span class="number">.2</span> T1: onChange <span class="keyword">event</span> may require instructions <span class="keyword">to</span> <span class="keyword">describe</span> the behavior <span class="keyword">before</span> <span class="keyword">user</span> <span class="keyword">using</span> the component. Keyboard <span class="keyword">test</span> <span class="keyword">required</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.1</span><span class="number">.1</span> T1: <span class="keyword">Include</span> a DOCTYPE declaration <span class="keyword">at</span> the <span class="keyword">beginning</span> <span class="keyword">of</span> a <span class="keyword">document</span> that refers <span class="keyword">to</span> a published DTD</span><br><span class="line"><span class="number">4.1</span><span class="number">.1</span> T3: The <span class="keyword">ID</span> <span class="keyword">attribute</span> must be <span class="keyword">unique</span> <span class="keyword">in</span> a <span class="keyword">document</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Keyboard Navigation</strong><br>● Focus Order<br>● HTML elements and related keystrokes<br>● Using both keyboard and mouse<br>● No Keyboard Trap<br>● Form controls<br>● Others - Specified Requirements</p>
+<p><strong>Visual Inspection </strong><br><img src="/blog/images/pics/accessibility/20160612-3.jpg" alt=""><br>● High Contrast<br>  √ all content readable<br>  √ all content usable<br>● Color and Information<br>● Others<br> √ Test blinking, flashing, moving and scrolling content<br> √ Test video-only, audio-only and multimedia content</p>
+<p> <strong>Screen Reader</strong><br><img src="/blog/images/pics/accessibility/20160612-4.jpg" alt=""><br>● Testing<br>  √ Make sure screen readers announce enough information so users can <strong>NAVIGATE</strong> the content<br>  √ Make sure screen readers announce enough information so users can <strong>UNDERSTAND</strong> the content<br>  √ Make sure screen readers announce enough information so users can <strong>OPERATE</strong> the content<br>● ARIA Support </p>
+<h2 id="Web-Accessibility-Initiative-Accessible-Rich-Internet-Application-WAI-ARIA"><a href="#Web-Accessibility-Initiative-Accessible-Rich-Internet-Application-WAI-ARIA" class="headerlink" title="Web Accessibility Initiative - Accessible Rich Internet Application (WAI-ARIA)"></a>Web Accessibility Initiative - Accessible Rich Internet Application (WAI-ARIA)</h2><p><img src="/blog/images/pics/accessibility/20160612-5.jpg" alt=""><br><a href="http://www.w3.org/TR/wai-aria/" target="_blank" rel="external">WAI-ARIA</a></p>
+<h2 id="Accessibility-Test-Mind-Map"><a href="#Accessibility-Test-Mind-Map" class="headerlink" title="Accessibility Test Mind Map"></a>Accessibility Test Mind Map</h2><p><img src="/blog/images/pics/accessibility/20160612-6.jpg" alt=""></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="http://www.w3.org/TR/WCAG20/" target="_blank" rel="external">Web Content Accessibility Guidelines (WCAG) 2.0</a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/" target="_blank" rel="external">W3C industry standard Accessible Rich Internet Applications (WAI-ARIA) 1.0</a></li>
+<li>Screen Reader supports ARIA <a href="http://blog.paciellogroup.com/2010/10/jaws-support-for-aria/" target="_blank" rel="external"><strong>HTML</strong></a> / <a href="http://www.freedomscientific.com/PDF/visionloss/manuals/DevDoc/JAWS-ARIA-Support.doc" target="_blank" rel="external"><strong>Word</strong></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Accessibility/ARIA" target="_blank" rel="external">ARIA - Mozilla</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/library/ie/hh801958%28v=vs.85%29.aspx" target="_blank" rel="external">Accessible Rich Internet Applications (ARIA)-IE</a></li>
+<li><a href="http://www.chromium.org/developers/design-documents/accessibility#TOC-WAI-ARIA-Support" target="_blank" rel="external">Accessibility Technical Documentation - Chrome</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Test_Cases" target="_blank" rel="external">ARIA Test Cases</a></li>
+<li><a href="http://hanshillen.github.io/jqtest/#goto_slider" target="_blank" rel="external">Accessible jQuery-ui Components Demonstration</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Accessibility/" rel="tag">#Accessibility</a>
+          
+        </div>
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+ 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/12/2016-06-12-AccessibilityTest/"
+           data-title="<原创>Web Accessibility Test Quick Guide" data-url="https://wofeng.github.io/blog/blog/2016/06/12/2016-06-12-AccessibilityTest/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.jpg"
+               alt="Wu Feng" />
+          <p class="site-author-name" itemprop="name">Wu Feng</p>
+          <p class="site-description motion-element" itemprop="description">Keep it sample and satisfied</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Web-Accessibility"><span class="nav-number">1.</span> <span class="nav-text">What is Web Accessibility?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-People-with-Disabilities-Use-the-Web"><span class="nav-number">2.</span> <span class="nav-text">How People with Disabilities Use the Web?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-You-Need-to-Care-About-Accessibility"><span class="nav-number">3.</span> <span class="nav-text">Why You Need to Care About Accessibility?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Four-main-principles"><span class="nav-number">4.</span> <span class="nav-text">Four main principles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development-and-Testing-Procedure"><span class="nav-number">5.</span> <span class="nav-text">Development and Testing Procedure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Accessibility-Initiative-Accessible-Rich-Internet-Application-WAI-ARIA"><span class="nav-number">6.</span> <span class="nav-text">Web Accessibility Initiative - Accessible Rich Internet Application (WAI-ARIA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessibility-Test-Mind-Map"><span class="nav-number">7.</span> <span class="nav-text">Accessibility Test Mind Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu Feng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div>本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wofeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
