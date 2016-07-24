@@ -68,7 +68,7 @@
 <link href="/blog/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Security,Mindmap," />
+  <meta name="keywords" content="Performance," />
 
 
 
@@ -84,18 +84,24 @@
 
 
 
-<meta name="description" content="通过OWASP学习，项目实践和第三方安全测试反馈总结出应用授权测试要点Mindmap,希望对大家做安全测试有所帮助。">
+<meta name="description" content="how to do load test to make sure whether vendor network can handle 40000 concurrent requests.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Authorization mind map">
-<meta property="og:url" content="https://wofeng.github.io/blog/2016/07/09/2016-07-09-Authorization/index.html">
+<meta property="og:title" content="Load Test with JMeter">
+<meta property="og:url" content="https://wofeng.github.io/blog/2016/07/24/2016-07-24-loadTest/index.html">
 <meta property="og:site_name" content="WuFeng's Blog">
-<meta property="og:description" content="通过OWASP学习，项目实践和第三方安全测试反馈总结出应用授权测试要点Mindmap,希望对大家做安全测试有所帮助。">
-<meta property="og:image" content="https://wofeng.github.io/blog/blog/images/pics/security/authorization.png">
-<meta property="og:updated_time" content="2016-07-24T05:35:50.834Z">
+<meta property="og:description" content="how to do load test to make sure whether vendor network can handle 40000 concurrent requests.">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d1.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d2.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d3.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d4.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d5.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d6.png">
+<meta property="og:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d7.png">
+<meta property="og:updated_time" content="2016-07-24T05:17:57.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Authorization mind map">
-<meta name="twitter:description" content="通过OWASP学习，项目实践和第三方安全测试反馈总结出应用授权测试要点Mindmap,希望对大家做安全测试有所帮助。">
-<meta name="twitter:image" content="https://wofeng.github.io/blog/blog/images/pics/security/authorization.png">
+<meta name="twitter:title" content="Load Test with JMeter">
+<meta name="twitter:description" content="how to do load test to make sure whether vendor network can handle 40000 concurrent requests.">
+<meta name="twitter:image" content="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/d1.png">
 
 
 
@@ -113,7 +119,7 @@
   };
 </script>
 
-  <title> Authorization mind map | WuFeng's Blog </title>
+  <title> Load Test with JMeter | WuFeng's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +259,7 @@
             
             
               
-                Authorization mind map
+                Load Test with JMeter
               
             
           </h1>
@@ -265,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-09T15:30:38+08:00" content="2016-07-09">
-              2016-07-09
+            <time itemprop="dateCreated" datetime="2016-07-24T12:38:11+08:00" content="2016-07-24">
+              2016-07-24
             </time>
           </span>
 
@@ -279,8 +285,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/blog/categories/Security/" itemprop="url" rel="index">
-                    <span itemprop="name">Security</span>
+                  <a href="/blog/categories/Performance/" itemprop="url" rel="index">
+                    <span itemprop="name">Performance</span>
                   </a>
                 </span>
 
@@ -295,8 +301,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/blog/2016/07/09/2016-07-09-Authorization/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/09/2016-07-09-Authorization/" itemprop="commentsCount"></span>
+                <a href="/blog/2016/07/24/2016-07-24-loadTest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/24/2016-07-24-loadTest/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -325,7 +331,35 @@
       
 
       
-        <h2 id="Mind-map"><a href="#Mind-map" class="headerlink" title="Mind map"></a>Mind map</h2><p>通过<a href="https://www.owasp.org/index.php/OWASP_Testing_Guide_v4_Table_of_Contents" target="_blank" rel="external">OWASP学习</a>和项目实践总结出应用授权测试要点Mindmap,希望对大家做安全测试有所帮助。(敏感信息用xxx替代)<br><img src="/blog/images/pics/security/authorization.png" alt=""></p>
+        <h2 id="Test-Target"><a href="#Test-Target" class="headerlink" title="Test Target"></a>Test Target</h2><p>To do load test to make sure whether vendor network can handle 40000 concurrent requests.</p>
+<h2 id="Test-Plan"><a href="#Test-Plan" class="headerlink" title="Test Plan"></a>Test Plan</h2><p>We need clarify a number of issues before testing, so we should communicate with others from different<br>teams and your manager in time. issues includes<br>How many available network bandwidth can be used for testing? (IT department, Operation team)<br>How many VMs can meet the testing requirement?  (IT department, Operation team)<br>How to assign VMs to different sites is rational? (IT department, Operation team)<br>…</p>
+<h2 id="Test-Environment"><a href="#Test-Environment" class="headerlink" title="Test Environment"></a>Test Environment</h2><p>VMs -  total 80 VMs, 4 in Hefei(HF), 4 in Hangzhou(HZ) and 72 in US<br>HF site: 4 VMs<br>CPU - Intel Xeon(R) CPU E5520 @ 2.27G 2.26G<br>MEM - 8G<br>Disk - 50G<br>OS- Win7 Enterprise</p>
+<p>HZ site: 4 VMs<br>E7-2870 @2.4G 2.4G<br>MEM: 8 G<br>Disk: 150G<br>OS- Win7 Enterprise</p>
+<p>US:  72 VMs<br>CPU: Intel(R) Xeon(R) CPU E7-2870 @2.4G 2.4G<br>MEM: 8 G<br>Disk -  80G<br>OS - Win7 Enterprise</p>
+<h2 id="Testing-tool-JMeter-v3-0-or-the-latest-version"><a href="#Testing-tool-JMeter-v3-0-or-the-latest-version" class="headerlink" title="Testing tool -  JMeter v3.0 or  the latest version"></a>Testing tool -  JMeter v3.0 or  the latest version</h2><p>Use JMeter to do distributed testing, Before we start, there are a couple of things to check.</p>
+<ol>
+<li>the firewalls on the systems are turned off.</li>
+<li>the clients (slave) are on the same subnet. </li>
+<li>the server(master) is in the same subnet,</li>
+<li>Make sure JMeter can access the server.</li>
+<li>Make sure you use the same version of JMeter on all the systems. Mixing versions may not work correctly.<br>Master – the system running Jmeter in non-GUI mode, which controls the test<br>Slave  – the system running jmeter-server, which takes commands from the master and send requests to the target system(s)<br>Target – the webserver we plan to stress test<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d1.png" alt=""></li>
+</ol>
+<h2 id="Test-Steps"><a href="#Test-Steps" class="headerlink" title="Test Steps"></a>Test Steps</h2><p> Make sure all VMs and machines installed JDK1.8<br> Unzip Jmeter package to any a directory<br> Config  jmeter configuration file ( <jmeter root="">/bin/jmeter.properties) in Master. </jmeter></p>
+<ul>
+<li>Add slave IP  to  “remote_hosts” in configuration, suggest to remove 127.0.0.1 or localhost as slave </li>
+<li>Increase the value of “jmeter.exit.check.pause”, which default value is 2000ms if the JVM has failed to exit.<br>On the slave systems, go to jmeter/bin directory and execute “jmeter-server.bat”<br>On the master system, execute the command to start testing in JMeter non-GUI mode<br>jmeter -n -r -t testplan.jmx -l report.csv<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d2.png" alt=""><br>To show aggregate report, add an aggregate report then choose the report.csv. Try again if report show abnormally.</li>
+</ul>
+<h2 id="Test-Results"><a href="#Test-Results" class="headerlink" title="Test Results"></a>Test Results</h2><p>Indicator definitions:<br>Samples  - the number of http request ran for given thread.<br>Average - the average time of a set of results.<br>Median - the time in the middle of a set of results. 50% of the samples took no more than this time; the remainder took at least as long.<br>90% Line - 90% of the samples took no more than this time. The remaining samples took at least as long as this.<br>95% Line - 95% of the samples took no more than this time. The remaining samples took at least as long as this.<br>99% Line - 99% of the samples took no more than this time. The remaining samples took at least as long as this.<br>Min - The shortest time for the samples with the same label.<br>Max - The longest time for the samples with the same label.<br>Error % - Percent of requests with errors.<br>Throughput - The number of requests per seconds that are sent to test machine during the test.<br>KB/sec - The throughput measured in Kilobytes per second.</p>
+<ol>
+<li><p>Load test with 8 VMs  4 salves in HF, 4 salves in HZ<br>1.1 Each VM  sends 500  concurrent  requests<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d3.png" alt=""></p>
+<p>1.2 Each VM send 1000 concurrent  requests<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d4.png" alt=""></p>
+</li>
+<li><p>Load test with 72 VMs in US<br>2.1 Each VM sends 500 concurrent requests<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d5.png" alt=""></p>
+<p>2.2 Each VM sends 600 concurrent requests<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d6.png" alt=""></p>
+<p>2.3 Each VM sends 1000 concurrent requests<br><img src="/blog/2016/07/24/2016-07-24-loadTest/d7.png" alt=""></p>
+</li>
+</ol>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>Estimate the available BW for testing need think about some factors, to avoid unnecessary troubles.<br>Currently, Total network bandwidth(BW) is XXX Mbps in HF site,  HZ site has the same.<br>We take advice from IT guys, about YYYMbps can be used  for this testing.<br>500 concurrent requests will generate 3MB  data traffic per second (24Mbps) after test in my machine,<br>so it is why we only use 4 VMs in HF/HZ.</p>
 
       
     </div>
@@ -347,9 +381,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/Security/" rel="tag">#Security</a>
-          
-            <a href="/blog/tags/Mindmap/" rel="tag">#Mindmap</a>
+            <a href="/blog/tags/Performance/" rel="tag">#Performance</a>
           
         </div>
       
@@ -358,17 +390,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2016/07/09/2016-07-09-Authentication/" rel="next" title="Authentication mind map">
-                <i class="fa fa-chevron-left"></i> Authentication mind map
+              <a href="/blog/2016/07/09/2016-07-09-frontendperformance/" rel="next" title="从用户体验出发的性能指标分析">
+                <i class="fa fa-chevron-left"></i> 从用户体验出发的性能指标分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2016/07/09/2016-07-09-frontendperformance/" rel="prev" title="从用户体验出发的性能指标分析">
-                从用户体验出发的性能指标分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,8 +422,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/09/2016-07-09-Authorization/"
-           data-title="Authorization mind map" data-url="https://wofeng.github.io/blog/blog/2016/07/09/2016-07-09-Authorization/">
+      <div class="ds-thread" data-thread-key="2016/07/24/2016-07-24-loadTest/"
+           data-title="Load Test with JMeter" data-url="https://wofeng.github.io/blog/blog/2016/07/24/2016-07-24-loadTest/">
       </div>
     
   </div>
@@ -486,7 +514,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mind-map"><span class="nav-number">1.</span> <span class="nav-text">Mind map</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Target"><span class="nav-number">1.</span> <span class="nav-text">Test Target</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Plan"><span class="nav-number">2.</span> <span class="nav-text">Test Plan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Environment"><span class="nav-number">3.</span> <span class="nav-text">Test Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing-tool-JMeter-v3-0-or-the-latest-version"><span class="nav-number">4.</span> <span class="nav-text">Testing tool -  JMeter v3.0 or  the latest version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Steps"><span class="nav-number">5.</span> <span class="nav-text">Test Steps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Results"><span class="nav-number">6.</span> <span class="nav-text">Test Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notes"><span class="nav-number">7.</span> <span class="nav-text">Notes</span></a></li></ol></div>
             
           </div>
         </section>
